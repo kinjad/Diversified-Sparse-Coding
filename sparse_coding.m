@@ -179,7 +179,7 @@ while t < pars.num_trials
         stat.var_tot         = stat.var_tot + sum(sum(S.^2,1))/size(S,1);
         
         % update basis
-        B = l2ls_learn_basis_dual(Xb, S, pars.VAR_basis);
+        B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.05);
     end
     
     % get statistics
@@ -207,9 +207,9 @@ while t < pars.num_trials
         
         %%%%%%%%%%%%%%%Yuan modified here to change image input into txt
         
-        if pars.display_images
-            save_figures(pars, t);
-        end
+        %if pars.display_images
+         %   save_figures(pars, t);
+        %end
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
