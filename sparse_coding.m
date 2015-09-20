@@ -135,10 +135,14 @@ while t < pars.num_trials
     % Take a random permutation of the samples
     indperm = randperm(size(X,2));
     
+    %size(X,2)/pars.batch_size
+    
     for batch=1:(size(X,2)/pars.batch_size),
         % Show progress in epoch
         if 1, fprintf('.'); end
         if (mod(batch,20)==0) fprintf('\n'); end
+        
+        
         
         % This is data to use for this step
         batch_idx = indperm((1:pars.batch_size)+pars.batch_size*(batch-1));
@@ -170,6 +174,7 @@ while t < pars.num_trials
             fprintf('sparsity_S = %g\n', sparsity_S);
         end
         
+        
         % get objective
         [fobj, fresidue, fsparsity] = getObjective2(B, S, Xb, pars.sparsity_func, pars.noise_var, pars.beta, pars.sigma, pars.epsilon);
         
@@ -192,7 +197,7 @@ while t < pars.num_trials
     
     % display
     if (pars.display_images && mod(t, pars.display_every)==0) || mod(t,pars.save_every)==0 || t==pars.num_trials
-        display_figures(pars, stat, B, S, t);
+        %display_figures(pars, stat, B, S, t);
     end
     
     fprintf(['epoch= %d, fobj= %f, fresidue= %f, fsparsity= %f, took %0.2f ' ...

@@ -15,7 +15,10 @@ load ../data/docs.mat
 
 %X = getdata_imagearray(IMAGES, 14, 10000);
 
+
+
 X = tfs';
+%size(X)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -26,10 +29,10 @@ X = tfs';
 %num_iters = 100;
 
 
-% Yuan modified num_iters
-num_bases = 200;
-beta = 0.01;
-batch_size = 500;
+% Yuan modified here
+num_bases = 100;
+beta = 0.02;
+batch_size = 900;
 num_iters = 10;
 
 
