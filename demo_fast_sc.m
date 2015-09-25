@@ -27,9 +27,9 @@ X = tfs';
 
 
 % Yuan modified num_iters
-num_bases = 200;
-beta = 0.01;
-batch_size = 500;
+num_bases = 100;
+beta = 0.02;
+batch_size = 900;
 num_iters = 10;
 
 

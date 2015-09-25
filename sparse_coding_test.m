@@ -135,7 +135,6 @@ while t < pars.num_trials
     % Take a random permutation of the samples
     indperm = randperm(size(X,2));
     
-    
     for batch=1:(size(X,2)/pars.batch_size),
         % Show progress in epoch
         if 1, fprintf('.'); end
@@ -148,7 +147,7 @@ while t < pars.num_trials
         % learn coefficients (conjugate gradient)
         if t==1 || ~pars.reuse_coeff
             if strcmp(pars.sparsity_func, 'L1') || strcmp(pars.sparsity_func, 'LARS') || strcmp(pars.sparsity_func, 'FS')
-                S = l1ls_featuresign(B, Xb, pars.beta/pars.sigma*pars.noise_var);
+                S= l1ls_featuresign(B, Xb, pars.beta/pars.sigma*pars.noise_var);
             else
                 S= cgf_fitS_sc2(B, Xb, pars.sparsity_func, pars.noise_var, pars.beta, pars.epsilon, pars.sigma, pars.tol, false, false, false);
             end
@@ -157,8 +156,7 @@ while t < pars.num_trials
         else
             if strcmp(pars.sparsity_func, 'L1') || strcmp(pars.sparsity_func, 'LARS') || strcmp(pars.sparsity_func, 'FS')
                 tic
-                
-                S = l1ls_featuresign(B, Xb, pars.beta/pars.sigma*pars.noise_var, S_all(:,batch_idx));
+                S= l1ls_featuresign(B, Xb, pars.beta/pars.sigma*pars.noise_var, S_all(:,batch_idx));
                 FS_time = toc
             else
                 S= cgf_fitS_sc2(B, Xb, pars.sparsity_func, pars.noise_var, pars.beta, pars.epsilon, pars.sigma, pars.tol, false, false, false, S_all(:,batch_idx));
@@ -180,8 +178,9 @@ while t < pars.num_trials
         stat.fsparsity_total = stat.fsparsity_total + fsparsity;
         stat.var_tot         = stat.var_tot + sum(sum(S.^2,1))/size(S,1);
         
+        % Since this is testing, this step will be omitted
         % update basis
-        B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.05);
+        % B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.05);
     end
     
     % get statistics
@@ -194,8 +193,8 @@ while t < pars.num_trials
     
     % display
     %if (pars.display_images && mod(t, pars.display_every)==0) || mod(t,pars.save_every)==0 || t==pars.num_trials
-    %display_figures(pars, stat, B, S, t);
-  %end
+      %display_figures(pars, stat, B, S, t);
+    %end
     
     fprintf(['epoch= %d, fobj= %f, fresidue= %f, fsparsity= %f, took %0.2f ' ...
              'seconds\n'], t, stat.fobj_avg(t), stat.fresidue_avg(t), ...
@@ -231,3 +230,6 @@ if ~expr
     retval = false;
 end
 return
+
+  
+  
