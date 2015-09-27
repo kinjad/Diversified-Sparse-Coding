@@ -181,7 +181,8 @@ while t < pars.num_trials
         stat.var_tot         = stat.var_tot + sum(sum(S.^2,1))/size(S,1);
         
         % update basis
-        B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.05);
+        %B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.1);
+        B = l2ls_learn_basis_dual(Xb, S, pars.VAR_basis);
     end
     
     % get statistics

@@ -2,7 +2,7 @@
       
 function Pre = Retrieve_doc()
       
-  load 'result.mat';  
+  load '../results/result.mat';  
   [dim1, dim2] = size(S_train);
   [dim3, dim4] = size(S_test);
   Pre =[];
@@ -17,7 +17,8 @@ function Pre = Retrieve_doc()
     
     %Compare labels
     precision = temp_label - label_test(i, 1);    
-    Pre = [Pre; sum(precision(:) == 0) / 100];    
+    Pre = [Pre; sum(precision(:) == 0) / 100];
+    Pre = mean(Pre);
   end
   save('../results/Precision.mat', 'Pre');
 end

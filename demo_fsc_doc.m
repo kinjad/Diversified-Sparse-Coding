@@ -12,10 +12,10 @@ function P = demo_fsc_doc()
   [label_train, label_test] = split_data(gnd, 0.7);
   
   % Parameters for training
-  num_bases = 100;
-  beta = 0.02;
+  num_bases = 200;
+  beta = 0.05;
   batch_size = 900;
-  num_iters = 50;
+  num_iters = 100;
   
   Binit = [];
   sparsity_func = 'L1';
@@ -32,10 +32,10 @@ function P = demo_fsc_doc()
   
   % parameters for testing
   
-  num_bases = 100;
-  beta = 0.02;
+  num_bases = 200;
+  beta = 0.05;
   batch_size = 900;
-  num_iters = 10;
+  num_iters = 100;
   
   Binit = [];
   sparsity_func = 'L1';
