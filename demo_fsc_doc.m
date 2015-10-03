@@ -13,7 +13,7 @@ function P = demo_fsc_doc()
   [label_train, label_test] = split_data(gnd, 0.7);
   Pre = 0;
   CVPre = [];
-  beta_set = [0.15];
+  beta_set = [0.2];
   lambda_set = [0.01, 0.03, 0.05, 0.07, 0.11, 0.2, 0.3, 0.4];
   for j = 1 : 5
       CVPre = [];
@@ -45,7 +45,7 @@ function P = demo_fsc_doc()
        X = train';
        
        lambda = lambda_set(j);
-       
+
        [D S_train stat] = sparse_coding(X, num_bases, beta, sparsity_func, ...
        epsilon, num_iters, batch_size, fname_save, Binit, lambda);
   

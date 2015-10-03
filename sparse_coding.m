@@ -1,4 +1,4 @@
-function [B S stat] = sparse_coding(X_total, num_bases, beta, sparsity_func, epsilon, num_iters, batch_size, fname_save, pars, Binit, resample_size, lambda)
+function [B S stat] = sparse_coding(X_total, num_bases, beta, sparsity_func, epsilon, num_iters, batch_size, fname_save, pars, lambda, Binit, resample_size)
 % Fast sparse coding algorithms
 %
 %    minimize_B,S   0.5*||X - B*S||^2 + beta*sum(abs(S(:)))
