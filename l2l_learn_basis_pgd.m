@@ -13,7 +13,7 @@ X_new = X';
 
 D = Bn_1';
 S_new = S';
-G = S_new' * (X_new - S_new * D) - lambda.* inv(D * D') * D;
+G = -S_new' * (X_new - S_new * D) - lambda.* inv(D * D') * D;
 par_pro = D - eta .* G;
 d = size(par_pro, 1);
 % The projected gradient 

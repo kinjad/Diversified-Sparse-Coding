@@ -214,8 +214,8 @@ while t < pars.num_trials
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-        save(experiment.matfname, 't', 'pars', 'B', 'stat', 'S_all');
-        fprintf('saved as %s\n', experiment.matfname);
+        %save(experiment.matfname, 't', 'pars', 'B', 'stat', 'S_all');
+        %fprintf('saved as %s\n', experiment.matfname);
     end
 end
 

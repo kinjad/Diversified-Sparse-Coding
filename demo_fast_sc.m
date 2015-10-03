@@ -10,12 +10,20 @@ end
 
 %%%%%%%%%%Yuan modified here to change iamge input into txt input
 %load ../data/IMAGES.mat
-load ../data/docs.mat
+load ../data/TDT2.mat 
 
+ fea = dimension_reduction(fea, 5000);
+  h_fea = size(fea, 1);
+  perm = randperm(h_fea);
+  fea = fea(perm, :);
+  gnd = gnd(perm, :);
+  data = tfidf(fea);  
+  [train, test] = split_data(data, 0.7);
+  [label_train, label_test] = split_data(gnd, 0.7);
 
 %X = getdata_imagearray(IMAGES, 14, 10000);
 
-X = tfs';
+X = train';
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -28,7 +36,7 @@ X = tfs';
 
 % Yuan modified num_iters
 num_bases = 100;
-beta = 0.02;
+beta = 0.4;
 batch_size = 900;
 num_iters = 10;
 

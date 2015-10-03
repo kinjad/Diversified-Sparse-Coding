@@ -1,8 +1,8 @@
-%function Pre = Retrieve_doc(S_train, S_test, label_train, label_test) ...
+function Pre = Retrieve_doc(S_train, S_test, label_train, label_test) ...
       
-function Pre = Retrieve_doc()
+%function Pre = Retrieve_doc()
       
-  load '../results/result.mat';  
+  %load '../results/result.mat';  
   [dim1, dim2] = size(S_train);
   [dim3, dim4] = size(S_test);
   Pre =[];

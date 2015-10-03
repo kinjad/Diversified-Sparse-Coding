@@ -1,4 +1,4 @@
-function [B S stat] = sparse_coding(X_total, num_bases, beta, sparsity_func, epsilon, num_iters, batch_size, fname_save, pars, Binit, resample_size)
+function [B S stat] = sparse_coding(X_total, num_bases, beta, sparsity_func, epsilon, num_iters, batch_size, fname_save, pars, Binit, resample_size, lambda)
 % Fast sparse coding algorithms
 %
 %    minimize_B,S   0.5*||X - B*S||^2 + beta*sum(abs(S(:)))
@@ -181,8 +181,8 @@ while t < pars.num_trials
         stat.var_tot         = stat.var_tot + sum(sum(S.^2,1))/size(S,1);
         
         % update basis
-        %B = l2l_learn_basis_pgd(Xb, S, B, 0.05, 0.1);
-        B = l2ls_learn_basis_dual(Xb, S, pars.VAR_basis);
+        B = l2l_learn_basis_pgd(Xb, S, B, lambda, 0.05);
+        %B = l2ls_learn_basis_dual(Xb, S, pars.VAR_basis);
     end
     
     % get statistics
@@ -216,8 +216,8 @@ while t < pars.num_trials
         
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         
-        save(experiment.matfname, 't', 'pars', 'B', 'stat', 'S_all');
-        fprintf('saved as %s\n', experiment.matfname);
+        %save(experiment.matfname, 't', 'pars', 'B', 'stat', 'S_all');
+        %fprintf('saved as %s\n', experiment.matfname);
     end
 end
 
