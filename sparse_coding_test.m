@@ -79,14 +79,15 @@ pars
 addpath sc2
 
 % initialize basis
-if ~exist('Binit') || isempty(Binit)
-    B = rand(pars.patch_size,pars.num_bases)-0.5;
-	B = B - repmat(mean(B,1), size(B,1),1);
-    B = B*diag(1./sqrt(sum(B.*B)));
-else
-    disp('Using Binit...');
-    B = Binit;
-end;
+%if ~exist('Binit')|| isempty(Binit)
+%    B = rand(pars.patch_size,pars.num_bases)-0.5;
+%	B = B - repmat(mean(B,1), size(B,1),1);
+%    B = B*diag(1./sqrt(sum(B.*B)));
+%else
+%    disp('Using Binit...');
+%    B = Binit;
+%end;
+B = Binit;    
 [L M]=size(B);
 winsize=sqrt(L);
 
@@ -157,7 +158,7 @@ while t < pars.num_trials
             if strcmp(pars.sparsity_func, 'L1') || strcmp(pars.sparsity_func, 'LARS') || strcmp(pars.sparsity_func, 'FS')
                 tic
                 S= l1ls_featuresign(B, Xb, pars.beta/pars.sigma*pars.noise_var, S_all(:,batch_idx));
-                FS_time = toc
+                %FS_time = toc
             else
                 S= cgf_fitS_sc2(B, Xb, pars.sparsity_func, pars.noise_var, pars.beta, pars.epsilon, pars.sigma, pars.tol, false, false, false, S_all(:,batch_idx));
             end
@@ -167,7 +168,7 @@ while t < pars.num_trials
         
         if strcmp(pars.sparsity_func, 'L1') || strcmp(pars.sparsity_func, 'LARS') || strcmp(pars.sparsity_func, 'FS')
             sparsity_S = sum(S(:)~=0)/length(S(:));
-            fprintf('sparsity_S = %g\n', sparsity_S);
+           % fprintf('sparsity_S = %g\n', sparsity_S);
         end
         
         % get objective
@@ -196,15 +197,15 @@ while t < pars.num_trials
       %display_figures(pars, stat, B, S, t);
     %end
     
-    fprintf(['epoch= %d, fobj= %f, fresidue= %f, fsparsity= %f, took %0.2f ' ...
-             'seconds\n'], t, stat.fobj_avg(t), stat.fresidue_avg(t), ...
-            stat.fsparsity_avg(t), stat.elapsed_time(t));
+    %fprintf(['epoch= %d, fobj= %f, fresidue= %f, fsparsity= %f, took %0.2f ' ...
+     %        'seconds\n'], t, stat.fobj_avg(t), stat.fresidue_avg(t), ...
+     %       stat.fsparsity_avg(t), stat.elapsed_time(t));
     
     % save results
     if mod(t,pars.save_every)==0 || t==pars.num_trials
-        fprintf('saving results ...\n');
+        %fprintf('saving results ...\n');
         experiment = [];
-        experiment.matfname = sprintf('%s.mat', pars.filename);
+        %experiment.matfname = sprintf('%s.mat', pars.filename);
         
         %%%%%%%%%%%%%%%Yuan modified here to change image input into txt
         

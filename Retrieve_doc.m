@@ -18,9 +18,10 @@ function Pre = Retrieve_doc(S_train, S_test, label_train, label_test) ...
     %Compare labels
     precision = temp_label - label_test(i, 1);    
     Pre = [Pre; sum(precision(:) == 0) / 100];
-    Pre = mean(Pre);
+    
   end
-  save('../results/Precision.mat', 'Pre');
+  Pre = mean(Pre);
+  %save('../results/Precision.mat', 'Pre');
 end
 
       
